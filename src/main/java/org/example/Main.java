@@ -1,62 +1,86 @@
 package org.example;
-
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.io.*;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        System.out.println("Welcome to Sharda Swiggy");
+        System.out.println("Today's Special");
+        info("/Users/lakshyanayyar/Desktop/food.csv");
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Select your Dish:");
+        String dish=sc.nextLine();
+        if (dish.equalsIgnoreCase("Dal Makhni")){
+            System.out.println("Here's the List of Some Famous Restaurants:");
+            info("/Users/lakshyanayyar/Desktop/RestC.csv");
+        }else if(dish.equalsIgnoreCase("Butter Chicken")){
+            info("/Users/lakshyanayyar/Desktop/RestD.csv");
+        }
+        System.out.println("Select the Restaurant");
+        String res=sc.nextLine();
+        System.out.println("Enter the Payment Mode-");
+        System.out.println("1. Google Pay\n2. Paytm\n3. PayPal");
+        String pay=sc.nextLine();
+        System.out.println("Your Payment is being Processed");
+        int i = 0;
+        while(i < 21) {
+            System.out.print("[");
+            for (int j=0;j<i;j++) {
+                System.out.print("#");
+            }
 
-        String[] menuItems = {
-                "1. Chiken Tikka - 1099",
-                "2. Panner masala - 299",
-                "3. Rajma Chawla - 899",
-                "4. Rasgulla - 699",
-                "5. Rasmalai - 799",
-                "6. Exit"
-        };
+            for (int j=0;j<20-i;j++) {
+                System.out.print(" ");
+            }
 
-        // Display the menu
-        System.out.println("Welcome to the Restaurant!");
-        System.out.println("Menu:");
+            System.out.print("] "+  i*5 + "%");
+            if(i<20) {
+                System.out.print("\r");
+                Thread.sleep(300);
+            }
+            i++;
+        }
+        System.out.println();
+        System.out.println("Your Order is being Placed");
+        i = 0;
+        while(i < 21) {
+            System.out.print("[");
+            for (int j=0;j<i;j++) {
+                System.out.print("#");
+            }
 
-        for (String item : menuItems) {
-            System.out.println(item);
+            for (int j=0;j<20-i;j++) {
+                System.out.print(" ");
+            }
+
+            System.out.print("] "+  i*5 + "%");
+            if(i<20) {
+                System.out.print("\r");
+                Thread.sleep(300);
+            }
+            i++;
+        }
+        System.out.println();
+        System.out.println("Your order will be ready in 10 minutes");
+
+    }
+    private static void info(String filePath) {
+        String line="";
+        try {
+            BufferedReader reader=new BufferedReader(new FileReader(filePath));
+            while((line =reader.readLine())!= null){
+                String[] row=line.split(",");
+                for (String i: row){
+                    System.out.printf("%-30s",i);
+                }
+                System.out.println();
+            }
+        }
+        catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
-        // Create a scanner object to read user input
-        Scanner scanner = new Scanner(System.in);
-
-        // Prompt the user to make a selection
-        System.out.print("Enter the number corresponding to your choice: ");
-        int choice = scanner.nextInt();
-
-        // Process the user's choice
-        switch (choice) {
-            case 1:
-                System.out.println("You selected Chicken Tikka. Price: 1099. Enjoy your meal!");
-                break;
-            case 2:
-                System.out.println("You selected Panner Masala. Price: 299. Enjoy your meal!");
-                break;
-            case 3:
-                System.out.println("You selected Rajma Chawla. Price: 899. Enjoy your meal!");
-                break;
-            case 4:
-                System.out.println("You selected Rasgulla. Price: 699. Enjoy your meal!");
-                break;
-            case 5:
-                System.out.println("You selected Rasmali. Price: 799. Enjoy your meal!");
-                break;
-            case 6:
-                System.out.println("Thank you for visiting the restaurant. Goodbye!");
-                break;
-            default:
-                System.out.println("Invalid choice. Please select a valid option.");
-                break;
-        }
-
-        // Close the scanner
-        scanner.close();
     }
 }
